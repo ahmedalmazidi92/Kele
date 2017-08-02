@@ -1,4 +1,5 @@
 require 'httparty'
+require 'json'
 class Kele
   include HTTParty
   def initialize(email, password)
@@ -9,5 +10,10 @@ class Kele
     else
       puts "Login invalid"
     end
+  end
+
+  def get_mentor_availability(mentor_id)
+    response = Kele.get( "#{@endpoint}/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
+    JSON.parse(response.body, { symbolize_names: true })
   end
 end
