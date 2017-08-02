@@ -12,6 +12,10 @@ class Kele
     end
   end
 
+  def get_mentor_availability(mentor_id)
+    response = Kele.get( "#{@endpoint}/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
+    JSON.parse(response.body, { symbolize_names: true })
+    
   def get_me
     response = Kele.get("#{@endpoint}/users/me", headers: { "authorization" => @auth_token })
     JSON.parse(response.body, { symbolize_names: true })
