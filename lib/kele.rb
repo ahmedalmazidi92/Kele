@@ -2,10 +2,12 @@ require 'httparty'
 require 'json'
 require './lib/roadmap'
 require './lib/messaging'
+require './lib/checkpoint'
 class Kele
   include HTTParty
   include Roadmap
   include Messaging
+  include Checkpoint
   def initialize(email, password)
     @endpoint = 'https://www.bloc.io/api/v1'
     response = Kele.post( "#{@endpoint}/sessions", body: { email: email, password: password } )
